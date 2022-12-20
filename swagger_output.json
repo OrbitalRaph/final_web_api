@@ -1,0 +1,343 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API de gestion de personnages de Genshin Impact",
+    "description": "API permettant de gérer les personnages de Genshin Impact"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Personnages",
+      "description": "Opérations sur les personnages"
+    },
+    {
+      "name": "Statistiques",
+      "description": "Opérations sur les statistiques"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/personnages/": {
+      "get": {
+        "tags": [
+          "Personnages"
+        ],
+        "description": "Récupère la liste des personnages.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Liste des personnages.",
+            "schema": {
+              "$ref": "#/definitions/Personnage"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Personnages"
+        ],
+        "description": "Crée un nouveau personnage.",
+        "parameters": [
+          {
+            "name": "personnage",
+            "in": "body",
+            "description": "Informations du personnage à créer.",
+            "schema": {
+              "$ref": "#/definitions/Personnage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnage créé.",
+            "schema": {
+              "$ref": "#/definitions/Personnage"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      }
+    },
+    "/personnages/filters": {
+      "get": {
+        "tags": [
+          "Personnages"
+        ],
+        "description": "Récupère la liste des personnages filtrés par les paramètres de la requête.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Liste des personnages filtrés.",
+            "schema": {
+              "$ref": "#/definitions/Personnage"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      }
+    },
+    "/personnages/{id}": {
+      "put": {
+        "tags": [
+          "Personnages"
+        ],
+        "description": "Modifie un personnage.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifiant du personnage à modifier."
+          },
+          {
+            "name": "personnage",
+            "in": "body",
+            "description": "Informations du personnage à modifier.",
+            "schema": {
+              "$ref": "#/definitions/Personnage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnage modifié.",
+            "schema": {
+              "$ref": "#/definitions/Personnage"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Personnages"
+        ],
+        "description": "Supprime un personnage.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifiant du personnage à supprimer."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnage supprimé.",
+            "schema": {
+              "$ref": "#/definitions/Personnage"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      }
+    },
+    "/statistiques/elements": {
+      "get": {
+        "tags": [
+          "Statistiques"
+        ],
+        "description": "Récupère le nombre de personnages par élément.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Nombre de personnages par élément.",
+            "schema": {
+              "$ref": "#/definitions/Statistique"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      }
+    },
+    "/statistiques/weapons": {
+      "get": {
+        "tags": [
+          "Statistiques"
+        ],
+        "description": "Récupère le nombre de personnages par type d\\'arme.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Nombre de personnages par type d'arme.",
+            "schema": {
+              "$ref": "#/definitions/Statistique"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      }
+    },
+    "/statistiques/rarities": {
+      "get": {
+        "tags": [
+          "Statistiques"
+        ],
+        "description": "Récupère le nombre de personnages par rareté.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Nombre de personnages par rareté.",
+            "schema": {
+              "$ref": "#/definitions/Statistique"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Statistique": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "Pyro"
+        },
+        "count": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "Personnage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Albedo"
+        },
+        "title": {
+          "type": "string",
+          "example": "Kreideprinz"
+        },
+        "description": {
+          "type": "string",
+          "example": "Génie connu sous le surnom de « Kreideprinz », Albedo est l'alchimiste en chef et le capitaine des enquêteurs de l'Ordre de Favonius."
+        },
+        "weapon_type": {
+          "type": "string",
+          "example": "Épée à une main"
+        },
+        "element": {
+          "type": "string",
+          "example": "Géo"
+        },
+        "affiliation": {
+          "type": "string",
+          "example": "Ordre de Favonius"
+        },
+        "region": {
+          "type": "string",
+          "example": "Mondstadt"
+        },
+        "rarity": {
+          "type": "number",
+          "example": 5
+        },
+        "birthday": {
+          "type": "string",
+          "example": "0000-09-13"
+        },
+        "constellation": {
+          "type": "string",
+          "example": "Princeps Cretaceus"
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Transformation : Reflux Géo"
+              },
+              "attributes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "example": "Énergie élémentaire"
+                    },
+                    "value": {
+                      "type": "string",
+                      "example": "40"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "passives": {
+          "type": "array",
+          "example": [
+            "Menace calcaire",
+            "Sagesse en bouteille",
+            "Découverte de génie"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "constellations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Pureté de la terre"
+              },
+              "level": {
+                "type": "number",
+                "example": 6
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
