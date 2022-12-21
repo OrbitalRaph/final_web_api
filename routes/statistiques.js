@@ -19,7 +19,8 @@ router.get('/elements', async (req, res) => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
         res.json(await Personnage.aggregate([
-            { $group: { _id: "$element", count: { $sum: 1 } } }
+            { $group: { _id: "$element", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
         ]));
     } catch (err) {
         console.log(err.message);
@@ -45,7 +46,8 @@ router.get('/weapons', async (req, res) => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
         res.json(await Personnage.aggregate([
-            { $group: { _id: "$weapon_type", count: { $sum: 1 } } }
+            { $group: { _id: "$weapon_type", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
         ]));
     } catch (err) {
         console.log(err.message);
@@ -71,7 +73,8 @@ router.get('/rarities', async (req, res) => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
         res.json(await Personnage.aggregate([
-            { $group: { _id: "$rarity", count: { $sum: 1 } } }
+            { $group: { _id: "$rarity", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
         ]));
     } catch (err) {
         console.log(err.message);

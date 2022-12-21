@@ -82,27 +82,35 @@
         }
       }
     },
-    "/personnages/filters": {
+    "/personnages/{id}": {
       "get": {
         "tags": [
           "Personnages"
         ],
-        "description": "Récupère la liste des personnages filtrés par les paramètres de la requête.",
-        "parameters": [],
+        "description": "Récupère un personnage par son id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Liste des personnages filtrés.",
+            "description": "Personnage.",
             "schema": {
               "$ref": "#/definitions/Personnage"
             }
+          },
+          "404": {
+            "description": "Personnage non trouvé."
           },
           "500": {
             "description": "Une erreur est survenue..."
           }
         }
-      }
-    },
-    "/personnages/{id}": {
+      },
       "put": {
         "tags": [
           "Personnages"
@@ -154,6 +162,26 @@
         "responses": {
           "200": {
             "description": "Personnage supprimé.",
+            "schema": {
+              "$ref": "#/definitions/Personnage"
+            }
+          },
+          "500": {
+            "description": "Une erreur est survenue..."
+          }
+        }
+      }
+    },
+    "/personnages/filters": {
+      "get": {
+        "tags": [
+          "Personnages"
+        ],
+        "description": "Récupère la liste des personnages filtrés par les paramètres de la requête.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Liste des personnages filtrés.",
             "schema": {
               "$ref": "#/definitions/Personnage"
             }

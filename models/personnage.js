@@ -9,7 +9,7 @@ const personnageSchema = new Schema({
     element: { type: String, required: true },
     affiliation: { type: String, required: true },
     region: { type: String, required: true },
-    rarity: { type: Number, required: true, min: 4, max: 5 },
+    rarity: { type: Number, required: true, min: 3, max: 5 },
     birthday: { type: String, required: true },
     constellation: { type: String, required: true },
     constellations: [{
