@@ -17,7 +17,7 @@ router.get('/elements', async (req, res) => {
     }
     */
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
         res.json(await Personnage.aggregate([
             { $group: { _id: "$element", count: { $sum: 1 } } },
             { $sort: { _id: 1 } }
@@ -44,7 +44,7 @@ router.get('/weapons', async (req, res) => {
     }
     */
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
         res.json(await Personnage.aggregate([
             { $group: { _id: "$weapon_type", count: { $sum: 1 } } },
             { $sort: { _id: 1 } }
@@ -71,7 +71,7 @@ router.get('/rarities', async (req, res) => {
     }
     */
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
         res.json(await Personnage.aggregate([
             { $group: { _id: "$rarity", count: { $sum: 1 } } },
             { $sort: { _id: 1 } }

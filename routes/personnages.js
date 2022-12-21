@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   }
   */
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     res.json(await Personnage.find().sort({ name: 1 }));
   } catch (err) {
     console.log(err.message);
@@ -44,7 +44,7 @@ router.get('/id/:id', async (req, res) => {
   }
   */
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     const id = req.params.id;
     const objectId = mongoose.Types.ObjectId(id);
 
@@ -77,7 +77,7 @@ router.get('/filters', async (req, res) => {
   }
   */
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     const query = req.query;
     const filters = {};
 
@@ -119,7 +119,7 @@ router.post('/', async (req, res) => {
   }
   */
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     res.json(await Personnage.create(req.body));
   } catch (err) {
     console.log(err.message);
@@ -153,7 +153,7 @@ router.put('/:id', async (req, res) => {
   }
   */
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     res.json(await Personnage.findByIdAndUpdate
       (req
         .params
@@ -186,7 +186,7 @@ router.delete('/:id', async (req, res) => {
   }
   */
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     res.json(await Personnage.findByIdAndDelete(req.params.id));
   } catch (err) {
     console.log(err.message);
